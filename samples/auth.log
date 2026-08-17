@@ -1,0 +1,220 @@
+Mar 17 06:25:00 web01 sshd[2501]: Server listening on 0.0.0.0 port 22.
+Mar 17 07:33:44 web01 sshd[2010]: Accepted publickey for mmoloi from 10.0.0.5 port 57810 ssh2: ED25519 SHA256:n9g88k2wzkp5qbpxktyo
+Mar 17 07:33:45 web01 sshd[2010]: pam_unix(sshd:session): session opened for user mmoloi(uid=1001) by (uid=0)
+Mar 17 08:25:00 web01 sshd[2044]: Failed password for mmoloi from 10.0.0.5 port 49584 ssh2
+Mar 17 08:38:38 web01 sshd[2024]: Accepted publickey for mmoloi from 10.0.0.5 port 46160 ssh2: ED25519 SHA256:lpz7p8agei996lp2ie4f
+Mar 17 08:38:39 web01 sshd[2024]: pam_unix(sshd:session): session opened for user mmoloi(uid=1001) by (uid=0)
+Mar 17 09:54:00 web01 sshd[2045]: Failed password for deploy from 41.79.10.22 port 50853 ssh2
+Mar 17 10:05:06 web01 sshd[2033]: Accepted publickey for mmoloi from 10.0.0.5 port 51776 ssh2: ED25519 SHA256:40q8qtwv73z01g0ujzqp
+Mar 17 10:05:07 web01 sshd[2033]: pam_unix(sshd:session): session opened for user mmoloi(uid=1001) by (uid=0)
+Mar 17 10:38:44 web01 sshd[2008]: Accepted publickey for mmoloi from 10.0.0.5 port 44099 ssh2: ED25519 SHA256:dvg8dcyq3rrhvohlml3e
+Mar 17 10:38:45 web01 sshd[2008]: pam_unix(sshd:session): session opened for user mmoloi(uid=1001) by (uid=0)
+Mar 17 10:57:00 web01 sshd[2048]: Failed password for kabelo from 41.79.10.23 port 50344 ssh2
+Mar 17 13:00:59 web01 sshd[2028]: Accepted publickey for theo from 41.79.10.23 port 45319 ssh2: ED25519 SHA256:i3rdqoyfgrqhi3osm4sd
+Mar 17 13:01:00 web01 sshd[2028]: pam_unix(sshd:session): session opened for user theo(uid=1001) by (uid=0)
+Mar 17 13:28:01 web01 sshd[2031]: Accepted publickey for deploy from 41.79.10.23 port 42679 ssh2: ED25519 SHA256:lny2opqj1a3lisocqow3
+Mar 17 13:28:02 web01 sshd[2031]: pam_unix(sshd:session): session opened for user deploy(uid=1001) by (uid=0)
+Mar 17 13:58:30 web01 sshd[2006]: Accepted publickey for theo from 41.79.10.23 port 53878 ssh2: ED25519 SHA256:qzpme66hpc5gn466v2ow
+Mar 17 13:58:31 web01 sshd[2006]: pam_unix(sshd:session): session opened for user theo(uid=1001) by (uid=0)
+Mar 17 15:31:59 web01 sshd[2039]: Accepted publickey for theo from 41.79.10.22 port 50702 ssh2: ED25519 SHA256:jq4rmelkarsaobgsgpyh
+Mar 17 15:32:00 web01 sshd[2039]: pam_unix(sshd:session): session opened for user theo(uid=1001) by (uid=0)
+Mar 17 16:51:14 web01 sshd[2017]: Accepted publickey for mmoloi from 10.0.0.5 port 49960 ssh2: ED25519 SHA256:x3twyaf7ia6hjmy1gwwo
+Mar 17 16:51:15 web01 sshd[2017]: pam_unix(sshd:session): session opened for user mmoloi(uid=1001) by (uid=0)
+Mar 17 18:03:39 web01 sshd[2023]: Accepted publickey for mmoloi from 10.0.0.5 port 48209 ssh2: ED25519 SHA256:gcxvt9rjfu1bfbcv5u2q
+Mar 17 18:03:40 web01 sshd[2023]: pam_unix(sshd:session): session opened for user mmoloi(uid=1001) by (uid=0)
+Mar 18 02:14:02 web01 sshd[2130]: Failed password for root from 203.0.113.45 port 33817 ssh2
+Mar 18 02:14:08 web01 sshd[2135]: Failed password for root from 203.0.113.45 port 36732 ssh2
+Mar 18 02:14:14 web01 sshd[2141]: Failed password for root from 203.0.113.45 port 52101 ssh2
+Mar 18 02:14:20 web01 sshd[2144]: Failed password for root from 203.0.113.45 port 38938 ssh2
+Mar 18 02:14:26 web01 sshd[2148]: Failed password for root from 203.0.113.45 port 36510 ssh2
+Mar 18 02:14:32 web01 sshd[2154]: Failed password for root from 203.0.113.45 port 38245 ssh2
+Mar 18 02:14:38 web01 sshd[2159]: Failed password for root from 203.0.113.45 port 37836 ssh2
+Mar 18 02:14:42 web01 sshd[2160]: Failed password for root from 203.0.113.45 port 41622 ssh2
+Mar 18 02:14:49 web01 sshd[2167]: Failed password for root from 203.0.113.45 port 63911 ssh2
+Mar 18 02:14:54 web01 sshd[2171]: Failed password for root from 203.0.113.45 port 30861 ssh2
+Mar 18 02:15:01 web01 sshd[2177]: Failed password for root from 203.0.113.45 port 55317 ssh2
+Mar 18 02:15:06 web01 sshd[2178]: Failed password for root from 203.0.113.45 port 39523 ssh2
+Mar 18 02:15:13 web01 sshd[2182]: Failed password for root from 203.0.113.45 port 37824 ssh2
+Mar 18 02:15:19 web01 sshd[2186]: Failed password for root from 203.0.113.45 port 55942 ssh2
+Mar 18 02:15:25 web01 sshd[2193]: Failed password for root from 203.0.113.45 port 37691 ssh2
+Mar 18 02:15:31 web01 sshd[2197]: Failed password for root from 203.0.113.45 port 39277 ssh2
+Mar 18 02:15:37 web01 sshd[2202]: Failed password for root from 203.0.113.45 port 48890 ssh2
+Mar 18 02:15:44 web01 sshd[2209]: Failed password for root from 203.0.113.45 port 49935 ssh2
+Mar 18 02:15:50 web01 sshd[2211]: Failed password for root from 203.0.113.45 port 56892 ssh2
+Mar 18 02:15:56 web01 sshd[2214]: Failed password for root from 203.0.113.45 port 51474 ssh2
+Mar 18 02:16:01 web01 sshd[2219]: Failed password for root from 203.0.113.45 port 32276 ssh2
+Mar 18 02:16:07 web01 sshd[2226]: Failed password for root from 203.0.113.45 port 60868 ssh2
+Mar 18 02:16:13 web01 sshd[2230]: Failed password for root from 203.0.113.45 port 32919 ssh2
+Mar 18 02:16:20 web01 sshd[2234]: Failed password for root from 203.0.113.45 port 45212 ssh2
+Mar 18 02:16:25 web01 sshd[2235]: Failed password for root from 203.0.113.45 port 41682 ssh2
+Mar 18 02:16:30 web01 sshd[2238]: Failed password for root from 203.0.113.45 port 51930 ssh2
+Mar 18 02:16:38 web01 sshd[2242]: Failed password for root from 203.0.113.45 port 34390 ssh2
+Mar 18 02:16:42 web01 sshd[2248]: Failed password for root from 203.0.113.45 port 47078 ssh2
+Mar 18 02:16:48 web01 sshd[2255]: Failed password for root from 203.0.113.45 port 41155 ssh2
+Mar 18 02:16:54 web01 sshd[2258]: Failed password for root from 203.0.113.45 port 64834 ssh2
+Mar 18 02:17:02 web01 sshd[2260]: Failed password for root from 203.0.113.45 port 42498 ssh2
+Mar 18 02:17:06 web01 sshd[2267]: Failed password for root from 203.0.113.45 port 57635 ssh2
+Mar 18 02:17:12 web01 sshd[2270]: Failed password for root from 203.0.113.45 port 34099 ssh2
+Mar 18 02:17:20 web01 sshd[2277]: Failed password for root from 203.0.113.45 port 31761 ssh2
+Mar 18 02:17:26 web01 sshd[2278]: Failed password for root from 203.0.113.45 port 35713 ssh2
+Mar 18 02:17:32 web01 sshd[2280]: Failed password for root from 203.0.113.45 port 58299 ssh2
+Mar 18 02:17:38 web01 sshd[2283]: Failed password for root from 203.0.113.45 port 45344 ssh2
+Mar 18 02:17:43 web01 sshd[2285]: Failed password for root from 203.0.113.45 port 46763 ssh2
+Mar 18 02:17:50 web01 sshd[2290]: Failed password for root from 203.0.113.45 port 54752 ssh2
+Mar 18 02:17:55 web01 sshd[2296]: Failed password for root from 203.0.113.45 port 56131 ssh2
+Mar 18 02:18:01 web01 sshd[2300]: Failed password for root from 203.0.113.45 port 59986 ssh2
+Mar 18 02:18:08 web01 sshd[2306]: Failed password for root from 203.0.113.45 port 38081 ssh2
+Mar 18 02:18:13 web01 sshd[2309]: Failed password for root from 203.0.113.45 port 33913 ssh2
+Mar 18 02:18:20 web01 sshd[2314]: Failed password for root from 203.0.113.45 port 56611 ssh2
+Mar 18 02:18:24 web01 sshd[2320]: Failed password for root from 203.0.113.45 port 61395 ssh2
+Mar 18 02:18:31 web01 sshd[2321]: Failed password for root from 203.0.113.45 port 45078 ssh2
+Mar 18 02:19:00 web01 sshd[2326]: Connection closed by authenticating user root 203.0.113.45 port 51250 [preauth]
+203.0.113.45 - - [18/Mar/2026:02:20:00 +0000] "POST /wp-login.php HTTP/1.1" 401 828 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:20:09 +0000] "POST /wp-login.php HTTP/1.1" 401 624 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:20:18 +0000] "POST /wp-login.php HTTP/1.1" 401 548 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:20:27 +0000] "POST /wp-login.php HTTP/1.1" 401 436 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:20:36 +0000] "POST /wp-login.php HTTP/1.1" 401 329 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:20:45 +0000] "POST /wp-login.php HTTP/1.1" 401 136 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:20:54 +0000] "POST /wp-login.php HTTP/1.1" 401 797 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:21:03 +0000] "POST /wp-login.php HTTP/1.1" 401 466 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:21:12 +0000] "POST /wp-login.php HTTP/1.1" 401 852 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:21:21 +0000] "POST /wp-login.php HTTP/1.1" 401 208 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:21:30 +0000] "POST /wp-login.php HTTP/1.1" 401 767 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:21:39 +0000] "POST /wp-login.php HTTP/1.1" 401 422 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:21:48 +0000] "POST /wp-login.php HTTP/1.1" 401 289 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:21:57 +0000] "POST /wp-login.php HTTP/1.1" 401 569 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:22:06 +0000] "POST /wp-login.php HTTP/1.1" 401 635 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:22:15 +0000] "POST /wp-login.php HTTP/1.1" 401 219 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:22:24 +0000] "POST /wp-login.php HTTP/1.1" 401 768 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:22:33 +0000] "POST /wp-login.php HTTP/1.1" 401 644 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:22:42 +0000] "POST /wp-login.php HTTP/1.1" 401 813 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:22:51 +0000] "POST /wp-login.php HTTP/1.1" 401 285 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:23:00 +0000] "POST /wp-login.php HTTP/1.1" 401 850 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:23:09 +0000] "POST /wp-login.php HTTP/1.1" 401 182 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:23:18 +0000] "POST /wp-login.php HTTP/1.1" 401 742 "-" "python-requests/2.31.0"
+203.0.113.45 - - [18/Mar/2026:02:23:27 +0000] "POST /wp-login.php HTTP/1.1" 401 152 "-" "python-requests/2.31.0"
+Mar 18 03:41:00 web01 sshd[2327]: Invalid user admin from 192.0.2.199 port 33171
+Mar 18 03:41:01 web01 sshd[2327]: Failed password for invalid user admin from 192.0.2.199 port 58414 ssh2
+Mar 18 03:41:11 web01 sshd[2328]: Invalid user test from 192.0.2.199 port 51710
+Mar 18 03:41:12 web01 sshd[2328]: Failed password for invalid user test from 192.0.2.199 port 63684 ssh2
+Mar 18 03:41:22 web01 sshd[2335]: Invalid user oracle from 192.0.2.199 port 60830
+Mar 18 03:41:23 web01 sshd[2335]: Failed password for invalid user oracle from 192.0.2.199 port 50934 ssh2
+Mar 18 03:41:33 web01 sshd[2336]: Invalid user postgres from 192.0.2.199 port 44951
+Mar 18 03:41:34 web01 sshd[2336]: Failed password for invalid user postgres from 192.0.2.199 port 38718 ssh2
+Mar 18 03:41:44 web01 sshd[2339]: Invalid user ubuntu from 192.0.2.199 port 61803
+Mar 18 03:41:45 web01 sshd[2339]: Failed password for invalid user ubuntu from 192.0.2.199 port 58935 ssh2
+Mar 18 03:41:55 web01 sshd[2342]: Invalid user pi from 192.0.2.199 port 53178
+Mar 18 03:41:56 web01 sshd[2342]: Failed password for invalid user pi from 192.0.2.199 port 37667 ssh2
+Mar 18 03:42:06 web01 sshd[2346]: Invalid user user from 192.0.2.199 port 43945
+Mar 18 03:42:07 web01 sshd[2346]: Failed password for invalid user user from 192.0.2.199 port 30074 ssh2
+Mar 18 03:42:17 web01 sshd[2351]: Invalid user guest from 192.0.2.199 port 30079
+Mar 18 03:42:18 web01 sshd[2351]: Failed password for invalid user guest from 192.0.2.199 port 30791 ssh2
+Mar 18 03:42:28 web01 sshd[2356]: Invalid user ftp from 192.0.2.199 port 36678
+Mar 18 03:42:29 web01 sshd[2356]: Failed password for invalid user ftp from 192.0.2.199 port 63348 ssh2
+Mar 18 03:42:39 web01 sshd[2362]: Invalid user mysql from 192.0.2.199 port 46312
+Mar 18 03:42:40 web01 sshd[2362]: Failed password for invalid user mysql from 192.0.2.199 port 55124 ssh2
+Mar 18 03:42:50 web01 sshd[2364]: Invalid user git from 192.0.2.199 port 42161
+Mar 18 03:42:51 web01 sshd[2364]: Failed password for invalid user git from 192.0.2.199 port 48798 ssh2
+Mar 18 03:43:01 web01 sshd[2368]: Invalid user jenkins from 192.0.2.199 port 62765
+Mar 18 03:43:02 web01 sshd[2368]: Failed password for invalid user jenkins from 192.0.2.199 port 41765 ssh2
+Mar 18 03:43:12 web01 sshd[2370]: Invalid user tomcat from 192.0.2.199 port 42127
+Mar 18 03:43:13 web01 sshd[2370]: Failed password for invalid user tomcat from 192.0.2.199 port 55134 ssh2
+Mar 18 03:43:23 web01 sshd[2375]: Invalid user nagios from 192.0.2.199 port 40366
+Mar 18 03:43:24 web01 sshd[2375]: Failed password for invalid user nagios from 192.0.2.199 port 50071 ssh2
+Mar 18 03:43:34 web01 sshd[2382]: Invalid user support from 192.0.2.199 port 57433
+Mar 18 03:43:35 web01 sshd[2382]: Failed password for invalid user support from 192.0.2.199 port 51724 ssh2
+Mar 18 03:43:45 web01 sshd[2387]: Invalid user backup from 192.0.2.199 port 36122
+Mar 18 03:43:46 web01 sshd[2387]: Failed password for invalid user backup from 192.0.2.199 port 56005 ssh2
+Mar 18 03:43:56 web01 sshd[2389]: Invalid user operator from 192.0.2.199 port 55568
+Mar 18 03:43:57 web01 sshd[2389]: Failed password for invalid user operator from 192.0.2.199 port 32294 ssh2
+Mar 18 03:44:07 web01 sshd[2393]: Invalid user service from 192.0.2.199 port 34896
+Mar 18 03:44:08 web01 sshd[2393]: Failed password for invalid user service from 192.0.2.199 port 51172 ssh2
+Mar 18 03:44:18 web01 sshd[2400]: Invalid user demo from 192.0.2.199 port 61158
+Mar 18 03:44:19 web01 sshd[2400]: Failed password for invalid user demo from 192.0.2.199 port 41169 ssh2
+Mar 18 03:44:29 web01 sshd[2403]: Invalid user default from 192.0.2.199 port 32604
+Mar 18 03:44:30 web01 sshd[2403]: Failed password for invalid user default from 192.0.2.199 port 62510 ssh2
+Mar 18 06:25:00 web01 sshd[2502]: Server listening on 0.0.0.0 port 22.
+Mar 18 07:09:41 web01 sshd[2054]: Accepted publickey for kabelo from 10.0.0.5 port 53319 ssh2: ED25519 SHA256:2ojmyyn6r1h9lx2wsh36
+Mar 18 07:09:42 web01 sshd[2054]: pam_unix(sshd:session): session opened for user kabelo(uid=1001) by (uid=0)
+Mar 18 07:29:39 web01 sshd[2069]: Accepted publickey for deploy from 41.79.10.23 port 42881 ssh2: ED25519 SHA256:8s76xirrwz6sbsct6286
+Mar 18 07:29:40 web01 sshd[2069]: pam_unix(sshd:session): session opened for user deploy(uid=1001) by (uid=0)
+41.79.10.22 - - [18/Mar/2026:09:00:00 +0000] "GET /assets/app.css HTTP/1.1" 200 719 "-" "Mozilla/5.0"
+41.79.10.22 - - [18/Mar/2026:09:04:00 +0000] "GET /assets/app.css HTTP/1.1" 200 782 "-" "Mozilla/5.0"
+41.79.10.22 - - [18/Mar/2026:09:08:00 +0000] "GET /assets/app.css HTTP/1.1" 200 462 "-" "Mozilla/5.0"
+41.79.10.22 - - [18/Mar/2026:09:12:00 +0000] "GET /assets/app.css HTTP/1.1" 200 863 "-" "Mozilla/5.0"
+41.79.10.22 - - [18/Mar/2026:09:16:00 +0000] "GET /assets/app.css HTTP/1.1" 200 569 "-" "Mozilla/5.0"
+41.79.10.22 - - [18/Mar/2026:09:20:00 +0000] "GET /assets/app.css HTTP/1.1" 200 127 "-" "Mozilla/5.0"
+41.79.10.22 - - [18/Mar/2026:09:24:00 +0000] "GET /assets/app.css HTTP/1.1" 200 606 "-" "Mozilla/5.0"
+41.79.10.22 - - [18/Mar/2026:09:28:00 +0000] "GET /assets/app.css HTTP/1.1" 200 323 "-" "Mozilla/5.0"
+41.79.10.22 - - [18/Mar/2026:09:32:00 +0000] "GET /assets/app.css HTTP/1.1" 200 611 "-" "Mozilla/5.0"
+41.79.10.22 - - [18/Mar/2026:09:36:00 +0000] "GET /assets/app.css HTTP/1.1" 200 155 "-" "Mozilla/5.0"
+Mar 18 09:37:39 web01 sshd[2090]: Accepted publickey for theo from 41.79.10.22 port 53175 ssh2: ED25519 SHA256:0wd927gabvyvhviodgyp
+Mar 18 09:37:40 web01 sshd[2090]: pam_unix(sshd:session): session opened for user theo(uid=1001) by (uid=0)
+41.79.10.22 - - [18/Mar/2026:09:40:00 +0000] "GET /assets/app.css HTTP/1.1" 200 190 "-" "Mozilla/5.0"
+41.79.10.22 - - [18/Mar/2026:09:44:00 +0000] "GET /assets/app.css HTTP/1.1" 200 826 "-" "Mozilla/5.0"
+192.0.2.199 - - [18/Mar/2026:10:00:00 +0000] "GET /.env HTTP/1.1" 404 629 "-" "Nuclei/3.1"
+192.0.2.199 - - [18/Mar/2026:10:07:00 +0000] "GET /.env HTTP/1.1" 404 872 "-" "Nuclei/3.1"
+192.0.2.199 - - [18/Mar/2026:10:14:00 +0000] "GET /.env HTTP/1.1" 404 273 "-" "Nuclei/3.1"
+192.0.2.199 - - [18/Mar/2026:10:21:00 +0000] "GET /.env HTTP/1.1" 404 671 "-" "Nuclei/3.1"
+192.0.2.199 - - [18/Mar/2026:10:28:00 +0000] "GET /.env HTTP/1.1" 404 343 "-" "Nuclei/3.1"
+192.0.2.199 - - [18/Mar/2026:10:35:00 +0000] "GET /.env HTTP/1.1" 404 522 "-" "Nuclei/3.1"
+Mar 18 11:36:58 web01 sshd[2060]: Accepted publickey for mmoloi from 41.79.10.22 port 55792 ssh2: ED25519 SHA256:b12wejtdz4gjkfe383m9
+Mar 18 11:36:59 web01 sshd[2060]: pam_unix(sshd:session): session opened for user mmoloi(uid=1001) by (uid=0)
+Mar 18 12:23:30 web01 sshd[2075]: Accepted publickey for mmoloi from 10.0.0.5 port 49771 ssh2: ED25519 SHA256:tz15nye4nm5iw0a40k5c
+Mar 18 12:23:31 web01 sshd[2075]: pam_unix(sshd:session): session opened for user mmoloi(uid=1001) by (uid=0)
+Mar 18 13:18:29 web01 sshd[2081]: Accepted publickey for theo from 10.0.0.5 port 49318 ssh2: ED25519 SHA256:xvt9gu0o8bp7e1lsozh8
+Mar 18 13:18:30 web01 sshd[2081]: pam_unix(sshd:session): session opened for user theo(uid=1001) by (uid=0)
+Mar 18 14:01:43 web01 sshd[2066]: Accepted publickey for mmoloi from 10.0.0.5 port 56619 ssh2: ED25519 SHA256:548s8d5vd68insme1ofs
+Mar 18 14:01:44 web01 sshd[2066]: pam_unix(sshd:session): session opened for user mmoloi(uid=1001) by (uid=0)
+Mar 18 15:33:00 web01 sshd[2097]: Failed password for kabelo from 10.0.0.5 port 59939 ssh2
+Mar 18 15:37:36 web01 sshd[2086]: Accepted publickey for kabelo from 41.79.10.22 port 46190 ssh2: ED25519 SHA256:d570dvhrn4idlteybqlh
+Mar 18 15:37:37 web01 sshd[2086]: pam_unix(sshd:session): session opened for user kabelo(uid=1001) by (uid=0)
+Mar 18 15:59:57 web01 sshd[2094]: Accepted publickey for theo from 41.79.10.22 port 54431 ssh2: ED25519 SHA256:3w5fq0bze77xntgo4wsw
+Mar 18 15:59:58 web01 sshd[2094]: pam_unix(sshd:session): session opened for user theo(uid=1001) by (uid=0)
+Mar 18 16:17:33 web01 sshd[2095]: Accepted publickey for theo from 41.79.10.22 port 56915 ssh2: ED25519 SHA256:327gumygca5man37lj75
+Mar 18 16:17:34 web01 sshd[2095]: pam_unix(sshd:session): session opened for user theo(uid=1001) by (uid=0)
+Mar 18 18:26:57 web01 sshd[2050]: Accepted publickey for kabelo from 41.79.10.22 port 42726 ssh2: ED25519 SHA256:d64n8j65pdl9l79oi1my
+Mar 18 18:26:58 web01 sshd[2050]: pam_unix(sshd:session): session opened for user kabelo(uid=1001) by (uid=0)
+Mar 19 04:08:00 web01 sshd[2405]: Failed password for theo from 198.51.100.77 port 59496 ssh2
+Mar 19 04:09:10 web01 sshd[2411]: Failed password for deploy from 198.51.100.77 port 63495 ssh2
+Mar 19 04:10:20 web01 sshd[2418]: Failed password for mmoloi from 198.51.100.77 port 40348 ssh2
+Mar 19 04:11:30 web01 sshd[2419]: Failed password for kabelo from 198.51.100.77 port 61825 ssh2
+Mar 19 04:12:40 web01 sshd[2422]: Failed password for info from 198.51.100.77 port 58354 ssh2
+Mar 19 04:13:50 web01 sshd[2426]: Failed password for sales from 198.51.100.77 port 35487 ssh2
+Mar 19 04:15:00 web01 sshd[2428]: Failed password for hr from 198.51.100.77 port 48165 ssh2
+Mar 19 04:16:10 web01 sshd[2435]: Failed password for finance from 198.51.100.77 port 35381 ssh2
+Mar 19 04:17:20 web01 sshd[2442]: Failed password for reception from 198.51.100.77 port 58620 ssh2
+Mar 19 04:18:30 web01 sshd[2444]: Failed password for intern from 198.51.100.77 port 44878 ssh2
+Mar 19 05:30:00 web01 sshd[2499]: message repeated 12 times: [ Failed password for root from 203.0.113.45 port 41022 ssh2]
+Mar 19 06:25:00 web01 sshd[2507]: Server listening on 0.0.0.0 port 22.
+Mar 19 10:08:45 web01 sshd[2113]: Accepted publickey for mmoloi from 41.79.10.23 port 43714 ssh2: ED25519 SHA256:4awiv6p92abg50qyk25j
+Mar 19 10:08:46 web01 sshd[2113]: pam_unix(sshd:session): session opened for user mmoloi(uid=1001) by (uid=0)
+Mar 19 10:21:23 web01 sshd[2121]: Accepted publickey for mmoloi from 41.79.10.23 port 54662 ssh2: ED25519 SHA256:2n65lkxkmh1pquvq4w6t
+Mar 19 10:21:24 web01 sshd[2121]: pam_unix(sshd:session): session opened for user mmoloi(uid=1001) by (uid=0)
+Mar 19 10:44:07 web01 sshd[2116]: Accepted publickey for deploy from 41.79.10.23 port 40132 ssh2: ED25519 SHA256:mzj1sxkakz4ei12sshkw
+Mar 19 10:44:08 web01 sshd[2116]: pam_unix(sshd:session): session opened for user deploy(uid=1001) by (uid=0)
+Mar 19 10:52:38 web01 sshd[2103]: Accepted publickey for deploy from 41.79.10.22 port 57978 ssh2: ED25519 SHA256:pr3wehxi3j8prs6h4lcv
+Mar 19 10:52:39 web01 sshd[2103]: pam_unix(sshd:session): session opened for user deploy(uid=1001) by (uid=0)
+Mar 19 13:16:36 web01 sshd[2122]: Accepted publickey for deploy from 41.79.10.23 port 46327 ssh2: ED25519 SHA256:igkdu8xwn7xdihi6o18z
+Mar 19 13:16:37 web01 sshd[2122]: pam_unix(sshd:session): session opened for user deploy(uid=1001) by (uid=0)
+Mar 19 14:35:05 web01 sshd[2115]: Accepted publickey for kabelo from 10.0.0.5 port 46673 ssh2: ED25519 SHA256:0y8qw7cd83i6qbp2o2cq
+Mar 19 14:35:06 web01 sshd[2115]: pam_unix(sshd:session): session opened for user kabelo(uid=1001) by (uid=0)
+Mar 19 15:09:00 web01 sshd[2123]: Failed password for mmoloi from 41.79.10.22 port 45566 ssh2
+Mar 19 15:16:40 web01 sshd[2111]: Accepted publickey for kabelo from 41.79.10.23 port 54578 ssh2: ED25519 SHA256:90w0ix3vasc6w59hx5qu
+Mar 19 15:16:41 web01 sshd[2111]: pam_unix(sshd:session): session opened for user kabelo(uid=1001) by (uid=0)
+Mar 19 15:48:22 web01 sshd[2106]: Accepted publickey for theo from 41.79.10.22 port 41025 ssh2: ED25519 SHA256:2eay336adcyh0cyuycds
+Mar 19 15:48:23 web01 sshd[2106]: pam_unix(sshd:session): session opened for user theo(uid=1001) by (uid=0)
+Mar 19 17:32:00 web01 sshd[2129]: Failed password for mmoloi from 41.79.10.22 port 41675 ssh2
+Mar 19 18:47:41 web01 sshd[2099]: Accepted publickey for kabelo from 10.0.0.5 port 51379 ssh2: ED25519 SHA256:0tlw0jvx7ykh1tbtja2g
+Mar 19 18:47:42 web01 sshd[2099]: pam_unix(sshd:session): session opened for user kabelo(uid=1001) by (uid=0)
+Mar 19 23:12:00 web01 sshd[2445]: Failed password for kabelo from 203.0.113.201 port 54830 ssh2
+Mar 19 23:12:20 web01 sshd[2449]: Failed password for kabelo from 203.0.113.201 port 47966 ssh2
+Mar 19 23:12:40 web01 sshd[2456]: Failed password for kabelo from 203.0.113.201 port 36523 ssh2
+Mar 19 23:13:00 web01 sshd[2462]: Failed password for kabelo from 203.0.113.201 port 47822 ssh2
+Mar 19 23:13:20 web01 sshd[2466]: Failed password for kabelo from 203.0.113.201 port 54827 ssh2
+Mar 19 23:13:40 web01 sshd[2472]: Failed password for kabelo from 203.0.113.201 port 43421 ssh2
+Mar 19 23:14:00 web01 sshd[2479]: Failed password for kabelo from 203.0.113.201 port 46182 ssh2
+Mar 19 23:14:20 web01 sshd[2486]: Failed password for kabelo from 203.0.113.201 port 34625 ssh2
+Mar 19 23:14:40 web01 sshd[2487]: Failed password for kabelo from 203.0.113.201 port 54000 ssh2
+Mar 19 23:15:20 web01 sshd[2493]: Accepted password for kabelo from 203.0.113.201 port 44122 ssh2
+Mar 19 23:15:23 web01 sshd[2493]: pam_unix(sshd:session): session opened for user kabelo(uid=1003) by (uid=0)

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Auth Log Analyser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ground: #131a24;
+    --panel: #1a2331;
+    --panel-raised: #212c3d;
+    --line: #2b374a;
+    --text: #dde3ec;
+    --text-dim: #8b99ae;
+    --text-faint: #5d6a7e;
+
+    --critical: #b47ce8;
+    --high: #e0576b;
+    --medium: #e8a33d;
+    --low: #6c9ce0;
+    --info: #7d8ca3;
+    --ok: #4fc3a1;
+
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* ---------- masthead ---------- */
+  .masthead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .title {
+    font-family: var(--mono);
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .title span { color: var(--text-faint); }
+  .subtitle {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-faint);
+    margin: 4px 0 0;
+  }
+  .controls { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  button {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text);
+    background: var(--panel-raised);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: background 120ms ease, border-color 120ms ease;
+  }
+  button:hover { background: #2a3648; border-color: #3a4860; }
+  button:focus-visible { outline: 2px solid var(--low); outline-offset: 2px; }
+  button:disabled { opacity: .5; cursor: default; }
+  button.primary { background: transparent; border-color: var(--text-faint); }
+
+  /* ---------- verdict ---------- */
+  .verdict {
+    margin: 32px 0 0;
+    padding: 22px 24px;
+    background: var(--panel);
+    border-left: 3px solid var(--text-faint);
+    border-radius: 2px;
+  }
+  .verdict.sev-critical { border-left-color: var(--critical); }
+  .verdict.sev-high { border-left-color: var(--high); }
+  .verdict.sev-medium { border-left-color: var(--medium); }
+  .verdict.sev-low { border-left-color: var(--low); }
+  .verdict.sev-none { border-left-color: var(--ok); }
+
+  .verdict h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .verdict p {
+    margin: 8px 0 0;
+    color: var(--text-dim);
+    font-size: 14px;
+    max-width: 68ch;
+  }
+  .meta {
+    margin-top: 16px;
+    display: flex;
+    gap: 26px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-faint);
+  }
+  .meta b { color: var(--text); font-weight: 500; }
+
+  /* ---------- the trace: signature element ---------- */
+  .trace-panel { margin-top: 28px; }
+  .panel-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .panel-head h3 {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin: 0;
+  }
+  .panel-head .hint { font-family: var(--mono); font-size: 11.5px; color: var(--text-faint); }
+
+  .trace {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 16px 16px 10px;
+    overflow-x: auto;
+  }
+  .trace svg { display: block; width: 100%; height: 190px; }
+
+  .tick-fail { fill: var(--medium); }
+  .tick-fail.dim { fill: #3a4657; }
+  .tick-success { fill: var(--ok); }
+  .tick-success.dim { fill: #3a4657; }
+  .axis { stroke: var(--line); stroke-width: 1; }
+  .axis-label { fill: var(--text-faint); font-family: var(--mono); font-size: 10px; }
+  .peak-label { fill: var(--text-dim); font-family: var(--mono); font-size: 10px; }
+
+  /* ---------- columns ---------- */
+  .columns {
+    display: grid;
+    grid-template-columns: 1.55fr 1fr;
+    gap: 26px;
+    margin-top: 30px;
+    align-items: start;
+  }
+  @media (max-width: 860px) { .columns { grid-template-columns: 1fr; } }
+
+  /* ---------- alerts ---------- */
+  .alert {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--info);
+    border-radius: 2px;
+    padding: 15px 17px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color 120ms ease, background 120ms ease;
+  }
+  .alert:hover, .alert:focus-visible { background: var(--panel-raised); }
+  .alert:focus-visible { outline: 2px solid var(--low); outline-offset: 2px; }
+  .alert.selected { background: var(--panel-raised); }
+  .alert.sev-critical { border-left-color: var(--critical); }
+  .alert.sev-high { border-left-color: var(--high); }
+  .alert.sev-medium { border-left-color: var(--medium); }
+  .alert.sev-low { border-left-color: var(--low); }
+  .alert.sev-info { border-left-color: var(--info); }
+
+  .alert-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 7px;
+  }
+  .badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 2px;
+    background: #ffffff0d;
+  }
+  .badge.sev-critical { color: var(--critical); }
+  .badge.sev-high { color: var(--high); }
+  .badge.sev-medium { color: var(--medium); }
+  .badge.sev-low { color: var(--low); }
+  .badge.sev-info { color: var(--info); }
+
+  .alert-title { font-weight: 600; font-size: 14.5px; }
+  .alert-ip {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-left: auto;
+  }
+  .alert p { margin: 0 0 8px; font-size: 13.5px; color: var(--text-dim); }
+  .alert dl { margin: 0; font-family: var(--mono); font-size: 11.5px; color: var(--text-faint); }
+  .alert dl div { display: flex; gap: 8px; margin-top: 3px; }
+  .alert dt { color: var(--text-faint); min-width: 74px; }
+  .alert dd { margin: 0; color: var(--text-dim); }
+  .action {
+    margin-top: 10px;
+    padding-top: 9px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .action b { color: var(--text); font-weight: 500; }
+
+  /* ---------- sources ---------- */
+  .sources { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 12px; }
+  .sources th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--text-faint);
+    font-size: 10.5px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 0 8px 8px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .sources td { padding: 7px 8px 7px 0; border-bottom: 1px solid #ffffff08; }
+  .sources tr.flagged td:first-child { color: var(--high); }
+  .sources .num { text-align: right; color: var(--text-dim); }
+  .sources tr.selected { background: var(--panel-raised); }
+  .sources tbody tr { cursor: pointer; }
+
+  .parse-note {
+    margin-top: 22px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--text-faint);
+    line-height: 1.7;
+  }
+
+  .empty {
+    padding: 44px 24px;
+    text-align: center;
+    color: var(--text-dim);
+    background: var(--panel);
+    border: 1px dashed var(--line);
+    border-radius: 2px;
+  }
+  .empty h2 { font-size: 17px; font-weight: 500; margin: 0 0 6px; color: var(--text); }
+  .empty p { margin: 0 auto; max-width: 46ch; font-size: 14px; }
+
+  .error {
+    padding: 14px 16px;
+    background: #e0576b14;
+    border: 1px solid #e0576b40;
+    border-radius: 2px;
+    font-size: 13.5px;
+    margin-top: 20px;
+  }
+
+  .loading { font-family: var(--mono); font-size: 12.5px; color: var(--text-dim); margin-top: 24px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <h1 class="title">auth-log-analyser<span>/</span></h1>
+      <p class="subtitle">Brute force, credential spraying and compromise detection</p>
+    </div>
+    <div class="controls">
+      <button id="btn-sample" class="primary">Load sample log</button>
+      <button id="btn-upload">Upload a log file</button>
+      <input type="file" id="file-input" accept=".log,.txt,text/plain" hidden />
+    </div>
+  </header>
+
+  <main id="output">
+    <div class="empty">
+      <h2>No log loaded</h2>
+      <p>Upload an SSH or nginx authentication log, or load the bundled sample to see what a server under attack looks like.</p>
+    </div>
+  </main>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  const output = document.getElementById("output");
+  const fileInput = document.getElementById("file-input");
+  let currentReport = null;
+  let selectedIp = null;
+
+  document.getElementById("btn-sample").addEventListener("click", loadSample);
+  document.getElementById("btn-upload").addEventListener("click", () => fileInput.click());
+  fileInput.addEventListener("change", handleUpload);
+
+  function setLoading(message) {
+    output.innerHTML = '<p class="loading">' + escapeHtml(message) + "</p>";
+  }
+
+  function showError(message) {
+    output.innerHTML = '<div class="error">' + escapeHtml(message) + "</div>";
+  }
+
+  async function loadSample() {
+    setLoading("Analysing samples/auth.log ...");
+    try {
+      const response = await fetch("/api/sample");
+      if (!response.ok) throw new Error(await readError(response));
+      render(await response.json());
+    } catch (err) {
+      showError("Could not load the sample: " + err.message);
+    }
+  }
+
+  async function handleUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    setLoading("Analysing " + file.name + " ...");
+    const body = new FormData();
+    body.append("file", file);
+    try {
+      const response = await fetch("/api/analyse", { method: "POST", body });
+      if (!response.ok) throw new Error(await readError(response));
+      render(await response.json());
+    } catch (err) {
+      showError("Could not analyse that file: " + err.message);
+    } finally {
+      event.target.value = "";
+    }
+  }
+
+  async function readError(response) {
+    try {
+      const data = await response.json();
+      return data.detail || response.statusText;
+    } catch (_) {
+      return response.statusText;
+    }
+  }
+
+  // ---- verdict copy: say what happened, not how many rows matched ----
+  function verdictFor(report) {
+    const s = report.summary;
+    const compromised = report.alerts.filter(a => a.rule_id === "success_after_failures");
+    if (compromised.length) {
+      const accounts = [...new Set(compromised.flatMap(a => a.usernames))].join(", ");
+      return {
+        severity: "critical",
+        headline: compromised.length === 1
+          ? "An account was accessed after repeated failed attempts"
+          : compromised.length + " accounts were accessed after repeated failed attempts",
+        detail: "Treat " + (accounts || "the affected account") + " as compromised. Rotate credentials and review what the session did before deciding it was benign."
+      };
+    }
+    if (!report.alerts.length) {
+      return {
+        severity: "none",
+        headline: "Nothing matched a detection rule",
+        detail: "The log parsed cleanly and no rule fired. Quiet logs are the normal case, not a sign the tool failed."
+      };
+    }
+    const worst = s.worst_severity;
+    const attackers = s.flagged_ips.length;
+    return {
+      severity: worst,
+      headline: "Authentication attacks attempted, none succeeded",
+      detail: attackers + (attackers === 1 ? " address" : " addresses") +
+        " triggered detection rules. No successful login followed a failure burst, so this looks like attempts rather than a breach."
+    };
+  }
+
+  function render(report) {
+    currentReport = report;
+    selectedIp = null;
+    const s = report.summary;
+    const verdict = verdictFor(report);
+
+    const html = [];
+
+    html.push('<section class="verdict sev-' + verdict.severity + '">');
+    html.push("<h2>" + escapeHtml(verdict.headline) + "</h2>");
+    html.push("<p>" + escapeHtml(verdict.detail) + "</p>");
+    html.push('<div class="meta">');
+    html.push(metaItem("Events", s.events));
+    html.push(metaItem("Addresses", s.distinct_ips));
+    html.push(metaItem("Alerts", s.alerts));
+    if (s.from) html.push(metaItem("Window", shortDate(s.from) + " to " + shortDate(s.to)));
+    html.push(metaItem("Source", report.source || "uploaded log"));
+    html.push("</div></section>");
+
+    html.push('<section class="trace-panel">');
+    html.push('<div class="panel-head"><h3>Activity trace</h3>');
+    html.push('<span class="hint" id="trace-hint">Failed attempts above the line, successful logins below. Select an alert to isolate one address.</span></div>');
+    html.push('<div class="trace" id="trace">' + traceSvg(report, null) + "</div></section>");
+
+    html.push('<div class="columns"><section>');
+    html.push('<div class="panel-head"><h3>Alerts</h3><span class="hint">' + report.alerts.length + " total</span></div>");
+    html.push('<div id="alert-list">' + (report.alerts.length ? report.alerts.map(alertHtml).join("") : '<div class="empty"><p>No rule fired on this log.</p></div>') + "</div>");
+    html.push("</section><section>");
+    html.push('<div class="panel-head"><h3>Sources</h3></div>');
+    html.push(sourcesHtml(report));
+    html.push(parseNote(report));
+    html.push("</section></div>");
+
+    output.innerHTML = html.join("");
+    wireInteractions();
+  }
+
+  function metaItem(label, value) {
+    return "<span>" + escapeHtml(label) + " <b>" + escapeHtml(String(value)) + "</b></span>";
+  }
+
+  function alertHtml(alert, index) {
+    const parts = [];
+    parts.push('<article class="alert sev-' + alert.severity + '" tabindex="0" data-ip="' + escapeHtml(alert.source_ip) + '" data-index="' + index + '">');
+    parts.push('<div class="alert-top">');
+    parts.push('<span class="badge sev-' + alert.severity + '">' + alert.severity + "</span>");
+    parts.push('<span class="alert-title">' + escapeHtml(alert.title) + "</span>");
+    parts.push('<span class="alert-ip">' + escapeHtml(alert.source_ip) + "</span>");
+    parts.push("</div>");
+    parts.push("<p>" + escapeHtml(alert.description) + "</p>");
+    parts.push("<dl>");
+    parts.push("<div><dt>Window</dt><dd>" + shortDate(alert.first_seen) + " to " + timeOnly(alert.last_seen) + "</dd></div>");
+    parts.push("<div><dt>Events</dt><dd>" + alert.event_count + "</dd></div>");
+    if (alert.usernames.length) {
+      const shown = alert.usernames.slice(0, 6).join(", ");
+      const more = alert.usernames.length > 6 ? " +" + (alert.usernames.length - 6) + " more" : "";
+      parts.push("<div><dt>Accounts</dt><dd>" + escapeHtml(shown + more) + "</dd></div>");
+    }
+    parts.push("</dl>");
+    parts.push('<p class="action"><b>What to do:</b> ' + escapeHtml(alert.recommendation) + "</p>");
+    parts.push("</article>");
+    return parts.join("");
+  }
+
+  function sourcesHtml(report) {
+    const flagged = new Set(report.summary.flagged_ips);
+    const rows = report.top_sources.map(source => {
+      return '<tr class="' + (flagged.has(source.ip) ? "flagged" : "") + '" data-ip="' + escapeHtml(source.ip) + '" tabindex="0">' +
+        "<td>" + escapeHtml(source.ip) + "</td>" +
+        '<td class="num">' + source.total + "</td>" +
+        '<td class="num">' + source.failures + "</td>" +
+        '<td class="num">' + source.distinct_usernames + "</td></tr>";
+    }).join("");
+    return '<table class="sources"><thead><tr><th>Address</th><th class="num">Events</th><th class="num">Failed</th><th class="num">Accounts</th></tr></thead><tbody>' + rows + "</tbody></table>";
+  }
+
+  function parseNote(report) {
+    const p = report.parsing;
+    const pct = Math.round(p.parse_rate * 100);
+    let note = "Parsed " + p.parsed_events + " events from " + p.total_lines + " lines. " +
+      p.ignored_lines + " lines were recognised but not authentication activity. " +
+      p.unparsed_lines + " lines were not understood (" + pct + "% of relevant lines parsed).";
+    if (p.samples_unparsed.length) {
+      note += "\n\nUnrecognised example:\n" + p.samples_unparsed[0];
+    }
+    return '<p class="parse-note">' + escapeHtml(note).replace(/\n/g, "<br>") + "</p>";
+  }
+
+  // ---- the trace ----
+  function traceSvg(report, highlightIp) {
+    const buckets = report.trace.buckets;
+    if (!buckets.length) return '<p class="loading">No events to plot.</p>';
+
+    const W = Math.max(760, buckets.length * 7);
+    const H = 190;
+    const padL = 42, padR = 12, padT = 16, padB = 30;
+    const plotW = W - padL - padR;
+    const baseline = padT + (H - padT - padB) * 0.72;
+    const failH = baseline - padT;
+    const succH = (H - padB) - baseline;
+
+    const peak = Math.max(1, ...buckets.map(b => b.failures));
+    const peakS = Math.max(1, ...buckets.map(b => b.successes));
+    const step = plotW / buckets.length;
+    const barW = Math.max(1.5, step * 0.62);
+
+    const dim = highlightIp ? " dim" : "";
+    const parts = [];
+    parts.push('<svg viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="xMinYMid meet" role="img" aria-label="Authentication activity over time">');
+
+    parts.push('<line class="axis" x1="' + padL + '" y1="' + baseline + '" x2="' + (W - padR) + '" y2="' + baseline + '" />');
+    parts.push('<text class="peak-label" x="4" y="' + (padT + 9) + '">' + peak + " fail</text>");
+    parts.push('<text class="axis-label" x="4" y="' + (baseline + 4) + '">0</text>');
+
+    buckets.forEach((bucket, index) => {
+      const x = padL + index * step + (step - barW) / 2;
+      if (bucket.failures > 0) {
+        const h = Math.max(1.5, (bucket.failures / peak) * failH);
+        parts.push('<rect class="tick-fail' + dim + '" x="' + x.toFixed(2) + '" y="' + (baseline - h).toFixed(2) +
+          '" width="' + barW.toFixed(2) + '" height="' + h.toFixed(2) + '"><title>' +
+          escapeHtml(shortDate(bucket.start)) + ": " + bucket.failures + " failed</title></rect>");
+      }
+      if (bucket.successes > 0) {
+        const h = Math.max(1.5, (bucket.successes / peakS) * succH * 0.8);
+        parts.push('<rect class="tick-success' + dim + '" x="' + x.toFixed(2) + '" y="' + baseline.toFixed(2) +
+          '" width="' + barW.toFixed(2) + '" height="' + h.toFixed(2) + '"><title>' +
+          escapeHtml(shortDate(bucket.start)) + ": " + bucket.successes + " succeeded</title></rect>");
+      }
+    });
+
+    // Time labels at the ends and middle: enough orientation without clutter.
+    const labelIdx = [0, Math.floor(buckets.length / 2), buckets.length - 1];
+    labelIdx.forEach((index, position) => {
+      const x = padL + index * step;
+      const anchor = position === 0 ? "start" : position === 2 ? "end" : "middle";
+      parts.push('<text class="axis-label" text-anchor="' + anchor + '" x="' + x.toFixed(1) +
+        '" y="' + (H - 10) + '">' + escapeHtml(shortDate(buckets[index].start)) + "</text>");
+    });
+
+    // Highlighted address is drawn as an overlay band across its active window.
+    if (highlightIp) {
+      const alerts = report.alerts.filter(a => a.source_ip === highlightIp);
+      const first = new Date(buckets[0].start).getTime();
+      const last = new Date(buckets[buckets.length - 1].start).getTime();
+      const span = Math.max(1, last - first);
+      alerts.forEach(alert => {
+        const x1 = padL + ((new Date(alert.first_seen).getTime() - first) / span) * (plotW - step);
+        const x2 = padL + ((new Date(alert.last_seen).getTime() - first) / span) * (plotW - step) + barW;
+        const colour = "var(--" + alert.severity + ")";
+        parts.push('<rect x="' + Math.max(padL, x1).toFixed(2) + '" y="' + padT +
+          '" width="' + Math.max(2.5, x2 - x1).toFixed(2) + '" height="' + (baseline - padT).toFixed(2) +
+          '" fill="' + colour + '" opacity="0.85"><title>' + escapeHtml(alert.title) + "</title></rect>");
+      });
+    }
+
+    parts.push("</svg>");
+    return parts.join("");
+  }
+
+  function wireInteractions() {
+    const hint = document.getElementById("trace-hint");
+
+    function select(ip) {
+      selectedIp = selectedIp === ip ? null : ip;
+      document.getElementById("trace").innerHTML = traceSvg(currentReport, selectedIp);
+      document.querySelectorAll(".alert, .sources tbody tr").forEach(node => {
+        node.classList.toggle("selected", selectedIp !== null && node.dataset.ip === selectedIp);
+      });
+      hint.textContent = selectedIp
+        ? "Showing when " + selectedIp + " triggered rules. Select again to clear."
+        : "Failed attempts above the line, successful logins below. Select an alert to isolate one address.";
+    }
+
+    document.querySelectorAll(".alert, .sources tbody tr").forEach(node => {
+      node.addEventListener("click", () => select(node.dataset.ip));
+      node.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          select(node.dataset.ip);
+        }
+      });
+    });
+  }
+
+  // ---- helpers ----
+  function shortDate(iso) {
+    const d = new Date(iso);
+    return d.toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false });
+  }
+  function timeOnly(iso) {
+    return new Date(iso).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false });
+  }
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+  }
+})();
+</script>
+</body>
+</html>
