@@ -228,7 +228,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.logfile == "-":
             report = analyse(sys.stdin, detections=build_detections(args), bucket_minutes=args.bucket_minutes)
         else:
-            with open(args.logfile, "r", encoding="utf-8", errors="replace") as handle:
+            with open(args.logfile, encoding="utf-8", errors="replace") as handle:
                 report = analyse(handle, detections=build_detections(args), bucket_minutes=args.bucket_minutes)
     except FileNotFoundError:
         print(f"error: no such file: {args.logfile}", file=sys.stderr)
@@ -249,11 +249,11 @@ def main(argv: list[str] | None = None) -> int:
             print(render(report, colour=use_colour, show_events=args.evidence))
     except BrokenPipeError:
         # Happens when output is piped into head, less, or grep -q. Exiting
-        # quietly is the expected Unix behaviour; a traceback here is noise.
-        try:
+        # quietly is the expected Unix behaviour; a traceback here is noise,
+        # and closing an already-broken pipe can itself raise.
+        with contextlib.suppress(OSError):
             sys.stdout.close()
-        finally:
-            return 0
+        return 0
 
     if args.fail_on:
         threshold = _EXIT_SEVERITY[args.fail_on]

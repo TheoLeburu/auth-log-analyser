@@ -112,5 +112,5 @@ def analyse(
 
 def analyse_file(path: str | Path, **kwargs) -> Report:
     """Analyse a log file, streaming it rather than reading it all into memory."""
-    with open(path, "r", encoding="utf-8", errors="replace") as handle:
+    with open(path, encoding="utf-8", errors="replace") as handle:
         return analyse(handle, **kwargs)

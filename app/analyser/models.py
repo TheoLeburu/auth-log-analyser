@@ -34,7 +34,7 @@ class Severity(enum.Enum):
         self.label = label
         self.rank = rank
 
-    def __lt__(self, other: "Severity") -> bool:
+    def __lt__(self, other: Severity) -> bool:
         return self.rank < other.rank
 
     def __str__(self) -> str:  # pragma: no cover - trivial

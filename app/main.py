@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import asyncio
 from pathlib import Path
+from typing import Annotated
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.responses import FileResponse
@@ -49,7 +50,7 @@ async def dashboard() -> FileResponse:
 
 @app.post("/api/analyse")
 async def analyse_upload(
-    file: UploadFile = File(...),
+    file: Annotated[UploadFile, File(...)],
     bucket_minutes: int = 60,
 ) -> dict:
     """Analyse an uploaded log file."""

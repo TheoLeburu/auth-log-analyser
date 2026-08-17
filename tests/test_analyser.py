@@ -8,7 +8,7 @@ explicitly rather than relying on the clock.
 from __future__ import annotations
 
 import unittest
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 
 from app.analyser.detections import (
@@ -20,7 +20,7 @@ from app.analyser.detections import (
     UserEnumerationDetection,
 )
 from app.analyser.models import AuthEvent, Outcome, Severity
-from app.analyser.parsers import NginxParser, SSHDParser, infer_year, parse_lines
+from app.analyser.parsers import infer_year, parse_lines
 from app.analyser.pipeline import analyse, analyse_file
 from app.analyser.stats import build_trace, summarise_ips, top_usernames
 
