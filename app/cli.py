@@ -8,6 +8,7 @@
 from __future__ import annotations
 
 import argparse
+import contextlib
 import json
 import sys
 
@@ -42,9 +43,45 @@ _EXIT_SEVERITY = {
     "critical": Severity.CRITICAL,
 }
 
+_BLOCKS = " ▁▂▃▄▅▆▇█"
+_BLOCKS_ASCII = " .:-=+*#@"
+
 
 def _paint(text: str, colour: str, enabled: bool) -> str:
     return f"{colour}{text}{_RESET}" if enabled else text
+
+
+def _can_encode(stream, text: str) -> bool:
+    encoding = getattr(stream, "encoding", None)
+    if not encoding:
+        return False
+    try:
+        text.encode(encoding)
+    except (LookupError, UnicodeEncodeError):
+        return False
+    return True
+
+
+def _configure_output() -> None:
+    """Make stdout able to carry the report on any platform.
+
+    A Windows console defaults to cp1252, which can encode neither the trace
+    blocks nor the U+FFFD that replaces undecodable bytes in a log line — so a
+    report that renders fine on Linux dies with UnicodeEncodeError halfway
+    through. Switching the stream to UTF-8 keeps the output identical
+    everywhere. An encoding that already handles the blocks is left alone, so
+    a deliberate PYTHONIOENCODING still wins.
+    """
+    if _can_encode(sys.stdout, _BLOCKS):
+        return
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8")
+        except (AttributeError, ValueError, OSError):
+            # Not a reconfigurable text stream. Settle for not crashing on the
+            # stray characters; _sparkline drops to ASCII on its own.
+            with contextlib.suppress(AttributeError, ValueError, OSError):
+                stream.reconfigure(errors="backslashreplace")
 
 
 def _sparkline(report: Report, width: int = 60) -> list[str]:
@@ -57,7 +94,7 @@ def _sparkline(report: Report, width: int = 60) -> list[str]:
     if not buckets:
         return []
 
-    blocks = " ▁▂▃▄▅▆▇█"
+    blocks = _BLOCKS if _can_encode(sys.stdout, _BLOCKS) else _BLOCKS_ASCII
     step = max(1, len(buckets) // width)
     condensed = []
     for index in range(0, len(buckets), step):
@@ -185,6 +222,7 @@ def main(argv: list[str] | None = None) -> int:
     tuning.add_argument("--office-end", type=int, default=20)
 
     args = parser.parse_args(argv)
+    _configure_output()
 
     try:
         if args.logfile == "-":
